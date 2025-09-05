@@ -5,55 +5,269 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Normikchel - Личная визитка</title>
     <style>
-        /* Добавьте сюда CSS стили из вашего Taplink */
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
+        }
+        
+        body {
             background-color: #fffaf4;
             color: #143211;
-            margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
+        
         .container {
             max-width: 600px;
             margin: 0 auto;
         }
+        
+        .avatar-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
         .avatar {
             width: 125px;
             height: 125px;
             border-radius: 50%;
-            margin: 0 auto;
-            display: block;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #5d755d;
         }
+        
+        h1 {
+            color: #143211;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        
+        h2 {
+            color: #5d755d;
+            margin: 25px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e8d9c5;
+        }
+        
+        .link-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
         .link-button {
             display: block;
             background-color: #5d755d;
             color: white;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 15px 20px;
             text-align: center;
             text-decoration: none;
             border-radius: 10px;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
+        
         .link-button:hover {
-            opacity: 0.8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        
+        .subtitle {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+        
+        /* Анимации */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes rubber {
+            0% { transform: scaleX(1); }
+            30% { transform: scaleX(1.05) scaleY(0.9); }
+            40% { transform: scaleX(0.9) scaleY(1.05); }
+            60% { transform: scaleX(1.05) scaleY(0.9); }
+            100% { transform: scaleX(1) scaleY(1); }
+        }
+        
+        @keyframes buzz {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(2px); }
+            50% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .blink { animation: blink 1.5s infinite; }
+        .rubber { animation: rubber 0.8s infinite; }
+        .buzz { animation: buzz 0.5s infinite; }
+        
+        /* Цвета для разных кнопок */
+        .telegram { background-color: #3b5bdb; }
+        .discord { background-color: #7048e8; }
+        .instagram { background-color: #f783ac; }
+        .vk { background-color: #3b5bdb; }
+        .twitch { background: linear-gradient(180deg, #9200ff 0%, #03ff03 100%); }
+        .tiktok { background-color: #000000; }
+        .yandex { background-color: #339af0; }
+        .youtube { background-color: #c92a2a; }
+        .youtube2 { background-color: #e03131; }
+        .donate { background-color: #f59f00; }
+        .meme { background-color: #e67700; }
+        .donatepay { background-color: #099268; }
+        .boosty { background-color: #f76707; }
+        .patreon { background-color: #000000; }
+        .sticker { background-color: #748ffc; }
+        .hipolink { background-color: #f06595; }
+        .neolink { background-color: #339af0; }
+        .zen { background-color: #000000; }
+        .rutube { background-color: #5f3dc4; color: #c92a2a; }
+        .vkvideo { background-color: #228be6; color: #e03131; }
+        .platform { background-color: #66a80f; }
+        .matreshka { background-color: #1864ab; color: #c92a2a; }
+        .nuum { background-color: #e67700; color: #4263eb; }
+        .yappy { background-color: #20c997; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://i.taplink.st/a/0/7/c/9/be36de.jpg?4" alt="Аватар" class="avatar">
-        <h1 style="text-align: center;">Нормик Чел</h1>
-        
+        <!-- Аватар и заголовок -->
+        <div class="avatar-section">
+            <img src="https://i.taplink.st/a/0/7/c/9/be36de.jpg?4" alt="Нормик Чел" class="avatar">
+            <h1>Нормик Чел</h1>
+        </div>
+
+        <!-- Секция "Важное" -->
         <h2>Важное</h2>
-        <a href="https://t.me/normik_chel" class="link-button">Телеграм</a>
-        <a href="https://discord.com/invite/8rtTQvX8JE" class="link-button">Дискорд</a>
-        
+        <div class="link-grid">
+            <a href="https://t.me/normik_chel" class="link-button telegram blink">
+                Телеграм
+                <span class="subtitle">Обязательно подпишись!</span>
+            </a>
+            
+            <a href="https://discord.com/invite/8rtTQvX8JE" class="link-button discord blink">
+                Дискорд
+                <span class="subtitle">Вступай в Дискорд, ведь там я буду общаться с подписчиками!</span>
+            </a>
+        </div>
+
+        <!-- Секция "Соц. Сети" -->
         <h2>Соц. Сети</h2>
-        <a href="https://www.instagram.com/normikchelik" class="link-button">Инстаграм</a>
-        <a href="https://vk.com/mbaenbai" class="link-button">ВК</a>
-        
-        <!-- Добавьте остальные ссылки по аналогии -->
+        <div class="link-grid">
+            <a href="https://www.instagram.com/normikchelik" class="link-button instagram blink">Инстаграм</a>
+            <a href="https://vk.com/mbaenbai" class="link-button vk rubber">ВК</a>
+        </div>
+
+        <!-- Секция "Другие платформы" -->
+        <h2>Другие платформы (на случай блокировки Ютуба в РФ)</h2>
+        <div class="link-grid">
+            <a href="https://twitch.tv/normikchelyt" class="link-button twitch blink">
+                Твич
+                <span class="subtitle">Подпишись, или пойдёшь в шарагу!</span>
+            </a>
+            
+            <a href="https://www.tiktok.com/@normik.chel" class="link-button tiktok">
+                Новый ТикТок
+                <span class="subtitle">Мемы и т. п.</span>
+            </a>
+            
+            <a href="https://dzen.ru/id/66e29c91362fd86be11fe6c4" class="link-button zen blink">Дзен</a>
+            <a href="https://rutube.ru/channel/31339947" class="link-button rutube blink">Рутуб</a>
+            <a href="https://vkvideo.ru/@normik_chel" class="link-button vkvideo blink">ВК Видео</a>
+            <a href="https://plvideo.ru/channel/fIuBDO3IalTG" class="link-button platform blink">Платформа</a>
+            <a href="https://matreshka.tv/channel/XwNgAWlCJPk/internal/about?target=form&frm=homescreen" class="link-button matreshka blink">Матрёшка</a>
+            <a href="https://nuum.ru/channel/NormikChel" class="link-button nuum blink">Нум</a>
+            <a href="https://yappy.media/n/normikchel" class="link-button yappy blink">Yappy</a>
+        </div>
+
+        <!-- Секция "Другие каналы" -->
+        <h2>Другие каналы</h2>
+        <div class="link-grid">
+            <a href="https://youtube.com/@normaipeople" class="link-button youtube buzz">
+                Ютуб
+                <span class="subtitle">Основной канал</span>
+            </a>
+            
+            <a href="https://youtube.com/@NormikChel" class="link-button youtube2 buzz">
+                Ютуб "Нормик Чел"
+                <span class="subtitle">Второй канал</span>
+            </a>
+        </div>
+
+        <!-- Секция "Донаты" -->
+        <h2>Донаты</h2>
+        <div class="link-grid">
+            <a href="https://www.donationalerts.com/r/normik_chel" class="link-button donate">
+                DonationAlerts
+                <span class="subtitle">Поддержка контента</span>
+            </a>
+            
+            <a href="https://memealerts.com/NormikChel" class="link-button meme">
+                MeleAlerts
+                <span class="subtitle">Поддержка контента</span>
+            </a>
+            
+            <a href="https://new.donatepay.ru/@NormikChel" class="link-button donatepay">
+                DonatePay
+                <span class="subtitle">Поддержка контента</span>
+            </a>
+            
+            <a href="https://boosty.to/normikchel/donate" class="link-button boosty">
+                Boosty
+                <span class="subtitle">Поддержка контента</span>
+            </a>
+            
+            <a href="https://www.patreon.com/c/NormikChel" class="link-button patreon">
+                Patreon
+                <span class="subtitle">Поддержка контента</span>
+            </a>
+        </div>
+
+        <!-- Секция "Прочее" -->
+        <h2>Прочее (Стикеры и т. п.)</h2>
+        <div class="link-grid">
+            <a href="https://t.me/addstickers/GlavnyeUblyudcyYutuba" class="link-button sticker blink">
+                СТИКЕР-ПАК КОНЧЕНОГО ВАКРОНА В ТЕЛЕГРАМЕ
+                <span class="subtitle">Распространяйте это СП, чем больше людей увидит - тем лучше!</span>
+            </a>
+            
+            <a href="https://t.me/addstickers/StendoOchkarik" class="link-button sticker blink">
+                ВТОРАЯ ЧАСТЬ СТИКЕР-ПАКА
+                <span class="subtitle">Распространяйте это СП, чем больше людей увидит - тем лучше!</span>
+            </a>
+            
+            <a href="https://t.me/addstickers/CHetyrnadcatyj" class="link-button sticker blink">
+                Стикер-пак "Четырнадцатый"
+                <span class="subtitle">Распространяйте это СП, чем больше людей увидит - тем лучше!</span>
+            </a>
+        </div>
+
+        <!-- Секция "Мульти-ссылки" -->
+        <h2>Мульти-ссылки</h2>
+        <div class="link-grid">
+            <a href="https://hipolink.net/normikchel" class="link-button hipolink blink">
+                HipoLink
+                <span class="subtitle">Ссылки на другие страницы</span>
+            </a>
+            
+            <a href="https://one.link/NormikChel" class="link-button neolink blink">
+                Neo.Link
+                <span class="subtitle">Ссылки на другие страницы</span>
+            </a>
+            
+            <a href="https://yandex.ru/maps/org/minecraft_fun/227413294795" class="link-button yandex blink">
+                Компания на Яндексе
+                <span class="subtitle">Ссылки на другие страницы</span>
+            </a>
+        </div>
     </div>
 </body>
 </html>
