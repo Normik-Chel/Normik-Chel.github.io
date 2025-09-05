@@ -1,1 +1,0 @@
-# Normik-Chel.github.io
