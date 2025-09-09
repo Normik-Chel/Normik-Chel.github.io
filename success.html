@@ -1,1 +1,82 @@
-<!DOCTYPE html><html><head><title>Спасибо!</title><style>body{font-family:Arial,sans-serif;text-align:center;padding:50px}</style></head><body><h1>Братуха, спасибо за донат! Ты самый лучший! ❤️</h1><p>Вернуться на <a href="https://normik-chel.github.io">главную</a>.</p><script>var e=new URLSearchParams(window.location.search),t=e.get("code"),o=e.get("state");t&&console.log("Донат успешен!");</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Спасибо!</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .donation-info { 
+            background: #f0f8ff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin: 20px auto; 
+            max-width: 400px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Братуха, спасибо за донат! Ты самый лучший! ❤️</h1>
+    
+    <div class="donation-info" id="donationInfo">
+        <h3>Информация о донате:</h3>
+        <p id="donationDetails">Загрузка...</p>
+    </div>
+    
+    <p>Вернуться на <a href="https://normik-chel.github.io">главную</a>.</p>
+
+    <script>
+        !function(){
+            // Получаем данные из URL
+            var e = new URLSearchParams(window.location.search),
+                t = e.get("code"),
+                o = e.get("state");
+            
+            if (t) {
+                console.log("Донат успешен!");
+                
+                // Пытаемся получить данные из localStorage
+                var savedAmount = localStorage.getItem('donationAmount');
+                var savedDonation = localStorage.getItem('lastDonation');
+                
+                var donationText = '';
+                
+                if (savedDonation) {
+                    try {
+                        var donation = JSON.parse(savedDonation);
+                        donationText = 'Имя: ' + donation.name + '<br>' +
+                                      'Сумма: ' + donation.amount + ' руб<br>' +
+                                      'Сообщение: ' + donation.message;
+                    } catch (e) {
+                        donationText = 'Сумма: ' + (savedAmount || 'Неизвестно') + ' руб';
+                    }
+                } else if (o) {
+                    // Парсим state если нет в localStorage
+                    var parts = o.split('||');
+                    donationText = 'Имя: ' + (parts[0] || 'Аноним') + '<br>' +
+                                  'Сообщение: ' + (parts[1] || 'Спасибо!');
+                } else {
+                    donationText = 'Спасибо за поддержку!';
+                }
+                
+                document.getElementById('donationDetails').innerHTML = donationText;
+                
+                // Сохраняем для виджета
+                var finalDonation = {
+                    name: savedDonation ? JSON.parse(savedDonation).name : (o ? o.split('||')[0] : 'Аноним'),
+                    amount: savedAmount || 'Неизвестно',
+                    message: savedDonation ? JSON.parse(savedDonation).message : (o ? o.split('||')[1] : 'Спасибо!'),
+                    timestamp: Date.now(),
+                    status: 'completed'
+                };
+                
+                localStorage.setItem('lastDonation', JSON.stringify(finalDonation));
+                
+                // Очищаем временные данные
+                localStorage.removeItem('donationAmount');
+                
+            } else {
+                document.getElementById('donationInfo').style.display = 'none';
+            }
+        }();
+    </script>
+</body>
+</html>
