@@ -1,0 +1,14 @@
+name: IndexNow Ping
+
+on:
+  push: # Этот workflow запустится сам каждый раз, когда ты пушишь изменения в GitHub
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Ping to IndexNow
+        run: |
+          curl -X POST "https://yandex.com/indexnow" \
+          -H "Content-Type: application/json; charset=utf-8" \
+          -d '{"host": "normik-chel.github.io", "key": "e2cac4c4d8f14c788c7a1a38c40f9310", "urlList": ["https://normik-chel.github.io/"]}'
