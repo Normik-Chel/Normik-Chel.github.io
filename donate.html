@@ -2,46 +2,59 @@
 <html>
 <head>
     <title>Поддержать Нормик Чела</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        input, button { padding: 10px; margin: 10px; font-size: 16px; }
-    </style>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
+    <noscript><meta http-equiv="refresh" content="0; url=https://normik-chel.github.io"></noscript>
+    <style>body{font-family:Arial,sans-serif;text-align:center;padding:50px}input,button{padding:10px;margin:10px;font-size:16px}</style>
 </head>
 <body>
     <h1>Закинь братюне на печеньки! 🍪</h1>
-    
-    <form id="donateForm">
-        <input type="number" id="amount" placeholder="Сумма (руб)" min="1" required>
-        <input type="text" id="message" placeholder="Твое сообщение (опционально)">
+    <form id="dForm">
+        <input type="number" id="amt" placeholder="Сумма (руб)" min="1" required oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+        <input type="text" id="msg" placeholder="Твое сообщение (опционально)" maxlength="50">
         <br>
         <button type="submit">Поддержать!</button>
     </form>
-    
-    <p id="messageEl"></p>
+    <p id="msgEl"></p>
 
     <script>
-        document.getElementById('donateForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const amount = document.getElementById('amount').value;
-            const message = document.getElementById('message').value || 'Донат от анонима';
+        !function(){
+            // Анти-dev защита
+            if(window.self !== window.top || window.location.hostname !== 'normik-chel.github.io') {
+                window.location.href = 'https://normik-chel.github.io';
+                return;
+            }
             
-            // Параметры для OAuth авторизации
-            const client_id = '6F6E7CF4814C90EBF49DC5379FAA8BFC83712673EB19B1E7A2149F880053AB91';
-            const redirect_uri = 'https://normik-chel.github.io/success.html';
-            const scope = 'payment.to-account("4100118296048272").limit(,' + amount + ')';
+            // Защита от копирования
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
             
-            // Формируем URL для авторизации
-            const authUrl = new URL('https://yoomoney.ru/oauth/authorize');
-            authUrl.searchParams.append('client_id', client_id);
-            authUrl.searchParams.append('response_type', 'code');
-            authUrl.searchParams.append('redirect_uri', redirect_uri);
-            authUrl.searchParams.append('scope', scope);
-            authUrl.searchParams.append('state', message); // Передаем сообщение в state
+            document.addEventListener('keydown', function(e) {
+                // Block F12, Ctrl+Shift+I, Ctrl+U, etc.
+                if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+                   (e.ctrlKey && e.keyCode == 85)) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
             
-            // Перенаправляем на страницу авторизации ЮMoney
-            window.location.href = authUrl.toString();
-        });
+            // Основная логика
+            document.getElementById('dForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var amount = document.getElementById('amt').value;
+                var message = document.getElementById('msg').value || 'Донат от анонима';
+                
+                var authUrl = new URL('https://yoomoney.ru/oauth/authorize');
+                authUrl.searchParams.append('client_id', '6F6E7CF4814C90EBF49DC5379FAA8BFC83712673EB19B1E7A2149F880053AB91');
+                authUrl.searchParams.append('response_type', 'code');
+                authUrl.searchParams.append('redirect_uri', 'https://normik-chel.github.io/success.html');
+                authUrl.searchParams.append('scope', 'payment.to-account("4100118296048272").limit(,' + amount + ')');
+                authUrl.searchParams.append('state', message);
+                
+                window.location.href = authUrl.toString();
+            });
+        }();
     </script>
 </body>
 </html>
