@@ -1,0 +1,214 @@
+/* 📱 Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #333;
+}
+
+/* 🎯 Container */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+/* 🍪 Header */
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* 📝 Form styles */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-input::placeholder {
+    color: #999;
+}
+
+/* 🎮 Button */
+.btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ff5252, #26a69a);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 💫 Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ❤️ Success page specific */
+.donation-info {
+    background: linear-gradient(135deg, #fff5f5, #f0f8ff);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border-left: 4px solid #ff6b6b;
+}
+
+.donation-info h3 {
+    color: #ff6b6b;
+    margin-bottom: 15px;
+}
+
+.donation-details {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #555;
+}
+
+.donation-details strong {
+    color: #333;
+}
+
+/* 🔗 Links */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+}
+
+/* 🍪 Cookie animation */
+.cookie-emoji {
+    font-size: 3em;
+    animation: bounce 2s infinite;
+    display: inline-block;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ✨ Glow effect */
+.glow-text {
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5),
+                 0 0 20px rgba(255, 107, 107, 0.3),
+                 0 0 30px rgba(255, 107, 107, 0.2);
+}
+
+/* 🛡️ Anti-dev message */
+.anti-dev-message {
+    display: none;
+    color: #ff4757;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
