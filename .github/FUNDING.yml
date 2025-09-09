@@ -1,13 +1,9 @@
-github: ['NormikChel', 'Normik-Chel']
-patreon: ['NormikChel']
-open_collective: # Replace with a single Open Collective username
-ko_fi: # Replace with a single Ko-fi username
-tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
-liberapay: # Replace with a single Liberapay username
-issuehunt: # Replace with a single IssueHunt username
-lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
-polar: # Replace with a single Polar username
-buy_me_a_coffee: ['https://buymeacoffee.com/normikchel']
-thanks_dev: ['NormikChel', 'Normik-Chel']
-custom: ['https://www.donationalerts.com/r/normik_chel', 'http://boosty.to/NormikChel/donate', 'https://new.donatepay.ru/@NormikChel', 'https://memealerts.com/NormikChel']
+github: [NormikChel, Normik-Chel]
+patreon: NormikChel
+buy_me_a_coffee: normikchel
+thanks_dev: [NormikChel, Normik-Chel]
+custom: 
+  - https://www.donationalerts.com/r/normik_chel
+  - http://boosty.to/NormikChel/donate
+  - https://new.donatepay.ru/@NormikChel
+  - https://memealerts.com/NormikChel
