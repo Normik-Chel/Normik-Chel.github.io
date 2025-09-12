@@ -3,46 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Подтвердите, что вы не робот</title>
+    <title>Подтвердите, что вы не робот | Normik-Chel</title>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
-        }
-        .captcha-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .h-captcha {
-            display: inline-block;
-            margin: 1rem 0;
-        }
-        .error {
-            color: red;
-            margin-top: 1rem;
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="captcha-style.css">
 </head>
 <body>
-    <div class="captcha-container">
-        <h2>Подтвердите, что вы не робот</h2>
-        <p>Пожалуйста, пройдите проверку hCaptcha для продолжения</p>
-        
-        <div class="h-captcha" data-sitekey="dec03b44-1666-4bea-a934-21e45bf0036c" data-callback="onCaptchaSuccess"></div>
-        
-        <p class="error" id="errorMsg">Ошибка при проверке капчи. Попробуйте снова.</p>
+    <div class="container">
+        <div class="captcha-box">
+            <h1>Добро пожаловать на сайт Normik-Chel!</h1>
+            <p>Пожалуйста, подтвердите, что вы не робот, чтобы продолжить.</p>
+            
+            <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-callback="onCaptchaSuccess"></div>
+            
+            <p class="error-message" id="errorMsg"></p>
+            <p class="note">Если капча не отображается, пожалуйста, обновите страницу или проверьте блокировщики рекламы.</p>
+        </div>
     </div>
 
-    <script src="captcha-verification.js"></script>
+    <script src="captcha-script.js"></script>
 </body>
 </html>
