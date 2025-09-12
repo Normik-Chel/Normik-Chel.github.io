@@ -42,7 +42,38 @@
 <!-- /Yandex.Metrika counter -->
    <meta name="google-site-verification" content="wH9agZ1jCtbwjoILI4Ds2IPAtlupiAVBGaOBYqVKOjc" />
 <!-- /Верификации -->
+
+
+
+
+<script>
+// Проверяем, проходил ли пользователь капчу
+(function() {
+    const captchaData = localStorage.getItem('captchaVerification');
+    const currentTime = Date.now();
+    const CAPTCHA_DURATION = 24 * 60 * 60 * 1000; // 24 часа
     
+    let shouldRedirect = true;
+    
+    if (captchaData) {
+        try {
+            const data = JSON.parse(captchaData);
+            const timePassed = currentTime - data.timestamp;
+            
+            if (data.passed && timePassed < CAPTCHA_DURATION) {
+                shouldRedirect = false;
+            }
+        } catch (e) {
+            console.error('Ошибка при проверке капчи:', e);
+        }
+    }
+    
+    if (shouldRedirect) {
+        window.location.href = 'https://Normik-Chel.github.io/captcha-wall.html';
+    }
+})();
+</script>
+
     <style>
         * {
             margin: 0;
