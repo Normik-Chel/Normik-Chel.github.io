@@ -5,6 +5,19 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
     <noscript><meta http-equiv="refresh" content="0; url=https://normik-chel.github.io"></noscript>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .anti-dev-message {
+            display: none;
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            animation: blink 1s linear infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0.3; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -39,32 +52,93 @@
 
     <script>
         !function(){
-            // Анти-dev защита
+            // Анти-dev защита - проверка на iframe и перенаправление
             if(window.self !== window.top || window.location.hostname !== 'normik-chel.github.io') {
                 window.location.href = 'https://normik-chel.github.io';
                 return;
             }
             
-            // Защита от копирования
-            document.addEventListener('contextmenu', function(e) {
+            // Запрет перетаскивания элементов
+            document.addEventListener('dragstart', function(e) {
                 e.preventDefault();
-                document.querySelector('.anti-dev-message').style.display = 'block';
                 return false;
             });
             
+            // Запрет выделения текста
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Запрет копирования
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Блокировка ПКМ
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showAntiDevMessage();
+                return false;
+            });
+            
+            // Блокировка клавиш
             document.addEventListener('keydown', function(e) {
-                if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-                   (e.ctrlKey && e.keyCode == 85)) {
+                // F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J, Ctrl+Shift+U
+                if(e.keyCode == 123 || 
+                  (e.ctrlKey && e.keyCode == 85) || 
+                  (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
+                  (e.ctrlKey && e.shiftKey && e.keyCode == 67) ||
+                  (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
+                  (e.ctrlKey && e.shiftKey && e.keyCode == 85)) {
                     e.preventDefault();
-                    document.querySelector('.anti-dev-message').style.display = 'block';
-                    setTimeout(() => {
-                        document.querySelector('.anti-dev-message').style.display = 'none';
-                    }, 3000);
+                    showAntiDevMessage();
+                    return false;
+                }
+                
+                // Попытка открыть исходный код через меню браузера
+                if (e.altKey && (e.keyCode == 82 || e.keyCode == 83 || e.keyCode == 85)) {
+                    e.preventDefault();
+                    showAntiDevMessage();
                     return false;
                 }
             });
             
-            // Основная логика
+            // Блокировка DevTools через детектирование открытия
+            function detectDevTools() {
+                var widthThreshold = 160;
+                var heightThreshold = 160;
+                var orientation = widthThreshold > heightThreshold ? 'vertical' : 'horizontal';
+                
+                function check() {
+                    if (window.outerWidth - window.innerWidth > widthThreshold || 
+                        window.outerHeight - window.innerHeight > heightThreshold) {
+                        showAntiDevMessage();
+                        window.location.href = 'https://normik-chel.github.io';
+                    }
+                }
+                
+                if (orientation === 'horizontal') {
+                    setInterval(function() {
+                        check();
+                    }, 1000);
+                }
+            }
+            
+            // Запуск детектирования DevTools
+            detectDevTools();
+            
+            // Функция показа сообщения
+            function showAntiDevMessage() {
+                var message = document.querySelector('.anti-dev-message');
+                message.style.display = 'block';
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Основная логика донатов
             document.getElementById('dForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var name = document.getElementById('name').value;
