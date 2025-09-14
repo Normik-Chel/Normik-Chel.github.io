@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Поддержать Нормик Чела</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.hcaptcha.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.hcaptcha.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com;">
     <noscript><meta http-equiv="refresh" content="0; url=https://normik-chel.github.io"></noscript>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -19,11 +19,19 @@
             margin: 20px 0;
             display: flex;
             justify-content: center;
+            min-height: 78px;
         }
         
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+        
+        .captcha-error {
+            color: red;
+            text-align: center;
+            display: none;
+            margin-top: 10px;
         }
         
         @keyframes blink {
@@ -57,7 +65,13 @@
             </div>
 
             <!-- Контейнер для капчи -->
-            <div id="captcha-container" class="h-captcha" data-sitekey="dec03b44-1666-4bea-a934-21e45bf0036c"></div>
+            <div id="captcha-container">
+                <div class="h-captcha" data-sitekey="dec03b44-1666-4bea-a934-21e45bf0036c" data-callback="onCaptchaSuccess" data-error-callback="onCaptchaError" data-expired-callback="onCaptchaExpired"></div>
+            </div>
+            
+            <div id="captcha-error" class="captcha-error">
+                Капча не загрузилась! Обнови страницу или напиши Нормику
+            </div>
 
             <button type="submit" class="btn" id="donate-btn" disabled>Поддержать! 🚀</button>
         </form>
@@ -66,10 +80,25 @@
     </div>
 
     <!-- Подключаем hCaptcha -->
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer onerror="showCaptchaError()"></script>
 
     <script>
         !function(){
+            // Проверяем загрузку hCaptcha
+            var captchaCheckInterval = setInterval(function() {
+                if (typeof hcaptcha === 'undefined') {
+                    // Капча не загрузилась через 5 секунд
+                    setTimeout(function() {
+                        if (typeof hcaptcha === 'undefined') {
+                            showCaptchaError();
+                            clearInterval(captchaCheckInterval);
+                        }
+                    }, 5000);
+                } else {
+                    clearInterval(captchaCheckInterval);
+                }
+            }, 1000);
+            
             // Анти-dev защита - проверка на iframe и перенаправление
             if(window.self !== window.top || window.location.hostname !== 'normik-chel.github.io') {
                 window.location.href = 'https://normik-chel.github.io';
@@ -156,9 +185,15 @@
                 }, 3000);
             }
             
+            // Функция показа ошибки капчи
+            function showCaptchaError() {
+                document.getElementById('captcha-error').style.display = 'block';
+            }
+            
             // Обработчик успешного прохождения капчи
             window.onCaptchaSuccess = function(token) {
                 document.getElementById('donate-btn').disabled = false;
+                document.getElementById('captcha-error').style.display = 'none';
             }
             
             // Обработчик истечения срока действия капчи
@@ -169,6 +204,7 @@
             // Обработчик ошибки капчи
             window.onCaptchaError = function() {
                 document.getElementById('donate-btn').disabled = true;
+                showCaptchaError();
             }
             
             // Основная логика донатов
