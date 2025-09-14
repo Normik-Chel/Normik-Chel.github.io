@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Поддержать Нормик Чела</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.hcaptcha.com">
     <noscript><meta http-equiv="refresh" content="0; url=https://normik-chel.github.io"></noscript>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -14,6 +14,18 @@
             text-align: center;
             animation: blink 1s linear infinite;
         }
+        
+        #captcha-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
         @keyframes blink {
             50% { opacity: 0.3; }
         }
@@ -44,11 +56,17 @@
                 <input type="text" id="msg" class="form-input" placeholder="Что сказать на стриме?" maxlength="50">
             </div>
 
-            <button type="submit" class="btn">Поддержать! 🚀</button>
+            <!-- Контейнер для капчи -->
+            <div id="captcha-container" class="h-captcha" data-sitekey="dec03b44-1666-4bea-a934-21e45bf0036c"></div>
+
+            <button type="submit" class="btn" id="donate-btn" disabled>Поддержать! 🚀</button>
         </form>
 
         <p class="anti-dev-message">Девайсы не пройдут! 😎</p>
     </div>
+
+    <!-- Подключаем hCaptcha -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
     <script>
         !function(){
@@ -138,9 +156,31 @@
                 }, 3000);
             }
             
+            // Обработчик успешного прохождения капчи
+            window.onCaptchaSuccess = function(token) {
+                document.getElementById('donate-btn').disabled = false;
+            }
+            
+            // Обработчик истечения срока действия капчи
+            window.onCaptchaExpired = function() {
+                document.getElementById('donate-btn').disabled = true;
+            }
+            
+            // Обработчик ошибки капчи
+            window.onCaptchaError = function() {
+                document.getElementById('donate-btn').disabled = true;
+            }
+            
             // Основная логика донатов
             document.getElementById('dForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Проверяем, пройдена ли капча
+                if (document.getElementById('donate-btn').disabled) {
+                    alert('Братан, нужно сначала пройти проверку!');
+                    return;
+                }
+                
                 var name = document.getElementById('name').value;
                 var amount = document.getElementById('amt').value;
                 var message = document.getElementById('msg').value || 'За чиллуху!';
