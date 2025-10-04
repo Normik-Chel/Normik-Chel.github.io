@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/normikchel
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://normik-chel.github.io
+  * I am normikchel (https://keybase.io/normikchel) on keybase.
+  * I have a public key ASAQlyjiGNkziOI61A1JaJvbMLwZV10lnPrzv-4JEh-gjgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120109728e218d93388e23ad40d49689bdb30bc19575d259cfaf3bfee09121fa08e0a",
+      "host": "keybase.io",
+      "kid": "0120109728e218d93388e23ad40d49689bdb30bc19575d259cfaf3bfee09121fa08e0a",
+      "uid": "164c226edee15d61f01a97dddd3dbf19",
+      "username": "normikchel"
+    },
+    "merkle_root": {
+      "ctime": 1759582575,
+      "hash": "b0e6033c044984b0becfa3ab89d785e4cb17ad38f1b87445015e706861edce80e1dd6e6f7dcfc39f539b6b447a52548a738de53f9cec3dbc260c5debf0277ff0",
+      "hash_meta": "6152e39bd2de0f71c058d73d07e001eaf7c1ffa38da8a05ff7bb4dd4a1f2970f",
+      "seqno": 27141040
+    },
+    "service": {
+      "entropy": "A0IXRBWr9njk+qLJnrb/MDUj",
+      "hostname": "normik-chel.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.5.3"
+  },
+  "ctime": 1759582842,
+  "expire_in": 504576000,
+  "prev": "3023715ccfe0054c299bc6311ca7b884a0f1a589e102b8b7f117583bd1bb16bd",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgEJco4hjZM4jiOtQNSWib2zC8GVddJZz687/uCRIfoI4Kp3BheWxvYWTESpcCBsQgMCNxXM/gBUwpm8YxHKe4hKDxpYnhAri38RdYO9G7Fr3EIKrcUv0ajvOM4RUTffwpm6aO/R+WUMtlTBnS5p3Hu8XtAgHCo3NpZ8RAV9GvLo9Mo7W4trUNRjugLwFthWgpxTPp3iwkefHjjX59ECt2mZjK9LppFqtI9ESmf5j2rkzFzMR/hF6dHwtMDqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIG0snSjHqpxM4RkRQDUsxqb8zRHrylVCYssxrm0cirG2o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/normikchel
+
+==================================================================
