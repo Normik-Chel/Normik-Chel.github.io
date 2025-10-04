@@ -212,36 +212,3 @@ body {
     font-size: 0.9em;
     margin-top: 10px;
 }
-
-.verified {
-    position: relative;
-    display: inline-block;
-}
-
-.verified::after {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-left: 6px;
-    background-image: url('./verified.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.verified:hover::before {
-    content: "Verified";
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 10;
-}
